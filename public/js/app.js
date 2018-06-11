@@ -47567,7 +47567,7 @@ var staticRenderFns = [
         ),
         _vm._v(" "),
         _c("h1", { staticClass: "site__title" }, [
-          _c("a", { staticClass: "no-ul", attrs: { href: "/" } }, [
+          _c("a", { staticClass: "no-ul", attrs: { href: "" } }, [
             _c("span", { staticClass: "sr-only" }, [_vm._v("Code head")]),
             _vm._v("\n               CodeHead\n            ")
           ])

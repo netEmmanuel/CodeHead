@@ -6,7 +6,7 @@
            
         </a>
         <h1 class="site__title">
-            <a href="/" class="no-ul">
+            <a href="" class="no-ul">
                 <span class="sr-only">Code head</span>
                CodeHead
             </a>
