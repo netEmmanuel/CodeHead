@@ -47348,6 +47348,48 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -47394,6 +47436,72 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             };
 
             this.pagination = pagination;
+        },
+        deleteblogpost: function deleteblogpost(blogpostid) {
+            var _this2 = this;
+
+            if (confirm("Are you Sure")) {
+                fetch('api/blogpost/' + blogpostid, {
+                    method: 'delete'
+                }).then(function (res) {
+                    return res.json();
+                }).then(function (data) {
+                    alert('Blog post removed');
+                    _this2.retriveposts();
+                }).catch(function (err) {
+                    return console.log(err);
+                });
+            }
+        },
+        addblogpost: function addblogpost() {
+            var _this3 = this;
+
+            if (this.edit === false) {
+                fetch('api/blogpost', {
+                    method: 'post',
+                    body: JSON.stringify(this.blogpost),
+                    headers: {
+                        'content-type': 'application/json'
+                    }
+                }).then(function (res) {
+                    return res.json();
+                }).then(function (data) {
+                    _this3.blogpost.title = '';
+                    _this3.blogpost.tag = '';
+                    _this3.blogpost.body = '';
+                    alert('Blog Post added');
+                    _this3.retriveposts();
+                }).catch(function (err) {
+                    return console.log(err);
+                });
+            } else {
+
+                fetch('api/blogpost', {
+                    method: 'put',
+                    body: JSON.stringify(this.blogpost),
+                    headers: {
+                        'content-type': 'application/json'
+                    }
+                }).then(function (res) {
+                    return res.json();
+                }).then(function (data) {
+                    _this3.blogpost.title = '';
+                    _this3.blogpost.tag = '';
+                    _this3.blogpost.body = '';
+                    alert('Blog Post Updated');
+                    _this3.retriveposts();
+                }).catch(function (err) {
+                    return console.log(err);
+                });
+            }
+        },
+        editblogpost: function editblogpost(blogpost) {
+            this.edit = true;
+            this.blogpost.id = blogpost.id;
+            this.blogpost_id = blogpost.id;
+            this.blogpost.title = blogpost.title;
+            this.blogpost.tag = blogpost.tag;
+            this.blogpost.body = blogpost.body;
         }
     }
 });
@@ -47409,77 +47517,235 @@ var render = function() {
   return _c("div", { staticClass: "site__body" }, [
     _c("div", { staticClass: "wrapper wrapper--flex" }, [
       _c("main", { staticClass: "site__main" }, [
-        _c("div", { staticClass: "container" }, [
+        _c("section", [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("hr"),
+          _vm._v(" "),
           _c(
-            "section",
+            "form",
+            {
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.addblogpost($event)
+                }
+              }
+            },
             [
-              _c("h1", { staticClass: "sr-only" }, [_vm._v("Latest Posts")]),
-              _vm._v(" "),
-              _c("h1", [_vm._v("Blog Post")]),
-              _vm._v(" "),
-              _vm._l(_vm.blogposts, function(blogpost) {
-                return _c("div", { key: blogpost.id }, [
-                  _c("h3", [_vm._v(_vm._s(blogpost.title))]),
-                  _vm._v(" "),
-                  _c("p", [_vm._v(" " + _vm._s(blogpost.body))]),
-                  _vm._v(" "),
-                  _c("h6", [_vm._v(_vm._s(blogpost.tag))])
-                ])
-              }),
-              _vm._v(" "),
-              _c(
-                "li",
-                { class: [{ disabled: !_vm.pagination.previous_page }] },
-                [
-                  _c(
-                    "a",
-                    {
-                      attrs: { href: "#" },
+              _c("div", { attrs: { id: "mc_embed_signup_scroll" } }, [
+                _c("div", { staticClass: "subscribe-form__fields" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.blogpost.title,
+                          expression: "blogpost.title"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text", placeholder: "Title" },
+                      domProps: { value: _vm.blogpost.title },
                       on: {
-                        click: function($event) {
-                          _vm.retriveposts(_vm.pagination.previous_page)
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.blogpost, "title", $event.target.value)
                         }
                       }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.blogpost.tag,
+                          expression: "blogpost.tag"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text", placeholder: "Tag" },
+                      domProps: { value: _vm.blogpost.tag },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.blogpost, "tag", $event.target.value)
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("textarea", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.blogpost.body,
+                          expression: "blogpost.body"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text", placeholder: "Body" },
+                      domProps: { value: _vm.blogpost.body },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.blogpost, "body", $event.target.value)
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-light btn-block",
+                      attrs: { type: "submit" }
                     },
-                    [_vm._v("Previous Page")]
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c("li", [
-                _c("a", [
-                  _vm._v(
-                    "Page " +
-                      _vm._s(_vm.pagination.current_page) +
-                      " of " +
-                      _vm._s(_vm.pagination.last_page)
+                    [_vm._v("Save Post")]
                   )
                 ])
-              ]),
-              _vm._v(" "),
-              _c("li", { class: [{ disabled: !_vm.pagination.next_page }] }, [
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "article",
+            { staticClass: "excerpt m-b-md p-b-md" },
+            _vm._l(_vm.blogposts, function(blogpost) {
+              return _c("div", { key: blogpost.id }, [
+                _c("header", { staticClass: "excerpt__header m-b-sm" }, [
+                  _c("h2", { staticClass: "excerpt__title h2 no-ul" }, [
+                    _c("a", { attrs: { href: "#" } }, [
+                      _vm._v(" " + _vm._s(blogpost.title))
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "post__meta" }, [
+                    _c("em", [_vm._v(_vm._s(blogpost.tag))])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "excerpt__body" }, [
+                  _c("p", [_vm._v(" " + _vm._s(blogpost.body))])
+                ]),
+                _vm._v(" "),
                 _c(
-                  "a",
+                  "button",
                   {
-                    attrs: { href: "#" },
                     on: {
                       click: function($event) {
-                        _vm.retriveposts(_vm.pagination.next_page)
+                        _vm.deleteblogpost(blogpost.id)
                       }
                     }
                   },
-                  [_vm._v("Next Page")]
+                  [_vm._v("Delete")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    on: {
+                      click: function($event) {
+                        _vm.editblogpost(blogpost)
+                      }
+                    }
+                  },
+                  [_vm._v("Edit")]
                 )
               ])
-            ],
-            2
-          )
+            })
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "pagination" }, [
+            _c(
+              "a",
+              {
+                staticClass: "pagination__older",
+                class: [{ disabled: !_vm.pagination.previous_page }],
+                attrs: { href: "#" },
+                on: {
+                  click: function($event) {
+                    _vm.retriveposts(_vm.pagination.previous_page)
+                  }
+                }
+              },
+              [
+                _vm._v(
+                  "\r\n                ← Previous Page\r\n                "
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c("span", { staticClass: "pagination__index" }, [
+              _vm._v(
+                "Page " +
+                  _vm._s(_vm.pagination.current_page) +
+                  " of " +
+                  _vm._s(_vm.pagination.last_page)
+              )
+            ]),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "pagination__older",
+                class: [{ disabled: !_vm.pagination.next_page }],
+                attrs: { href: "#" },
+                on: {
+                  click: function($event) {
+                    _vm.retriveposts(_vm.pagination.next_page)
+                  }
+                }
+              },
+              [_vm._v("\r\n                Next Page →\r\n                ")]
+            )
+          ])
         ])
-      ])
+      ]),
+      _vm._v(" "),
+      _vm._m(1)
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h3", [_c("strong", [_vm._v(" Latest Blog Posts")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("aside", { staticClass: "site__sidebar" }, [
+      _c("div", { staticClass: "box p-a-sm m-b-md" }, [
+        _c("p", { staticClass: "m-b-sm" }, [
+          _c("strong", [_vm._v("CodeHead")]),
+          _vm._v(
+            ". Articles on Software Development, Artificial Intelligence and Cryptocurrency . All articles are written by "
+          ),
+          _c("a", { attrs: { href: "https://damilareemmanuel.com" } }, [
+            _vm._v("Damilare Emmanuel")
+          ]),
+          _vm._v(", Software Developer. ")
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -47553,31 +47819,13 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("header", { staticClass: "site__header" }, [
       _c("div", { staticClass: "wrapper wrapper--flex" }, [
-        _c(
-          "a",
-          {
-            staticClass: "anchorButton no-btn site__nav__open",
-            attrs: { href: "#site__footer__nav" }
-          },
-          [
-            _c("span", { staticClass: "sr-only" }, [
-              _vm._v("Open Site Navigation")
-            ])
-          ]
-        ),
-        _vm._v(" "),
         _c("h1", { staticClass: "site__title" }, [
-          _c("a", { staticClass: "no-ul", attrs: { href: "" } }, [
-            _c("span", { staticClass: "sr-only" }, [_vm._v("Code head")]),
-            _vm._v("\n               CodeHead\n            ")
+          _c("a", { staticClass: "no-ul", attrs: { href: "#" } }, [
+            _c("span", { staticClass: "sr-only" }, [_vm._v("CodeHead")]),
+            _vm._v(" "),
+            _c("h3", [_vm._v("CodeHead")])
           ])
-        ]),
-        _vm._v(" "),
-        _c(
-          "a",
-          { staticClass: "site__search__open", attrs: { href: "/search" } },
-          [_c("span", { staticClass: "sr-only" }, [_vm._v("Open Site Search")])]
-        )
+        ])
       ])
     ])
   }
