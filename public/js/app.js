@@ -47475,7 +47475,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     return console.log(err);
                 });
             } else {
-
                 fetch('api/blogpost', {
                     method: 'put',
                     body: JSON.stringify(this.blogpost),
@@ -47498,7 +47497,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         editblogpost: function editblogpost(blogpost) {
             this.edit = true;
             this.blogpost.id = blogpost.id;
-            this.blogpost_id = blogpost.id;
+            this.blogpost.post_id = blogpost.id;
             this.blogpost.title = blogpost.title;
             this.blogpost.tag = blogpost.tag;
             this.blogpost.body = blogpost.body;
